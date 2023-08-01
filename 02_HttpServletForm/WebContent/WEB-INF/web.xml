@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>01_GenericServlet</display-name>
+  <display-name>02_HttpServletForm</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -13,30 +13,20 @@
     <description></description>
     <display-name>GenericServletTest</display-name>
     <servlet-name>GenericServletTest</servlet-name>
-    <servlet-class>servlet.generic.GenericServletTest</servlet-class>
+    <servlet-class>generic.GenericServletTest</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>GenericServletTest</servlet-name>
-    <url-pattern>/gst</url-pattern>
+    <url-pattern>/GenericServletTest</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>HttpServletTest</display-name>
-    <servlet-name>HttpServletTest</servlet-name>
-    <servlet-class>servlet.http.HttpServletTest</servlet-class>
+    <display-name>HttpFormServlet</display-name>
+    <servlet-name>HttpFormServlet</servlet-name>
+    <servlet-class>servlet.form.HttpFormServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HttpServletTest</servlet-name>
-    <url-pattern>/hst</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>WordServlet</display-name>
-    <servlet-name>WordServlet</servlet-name>
-    <servlet-class>servlet.http.WordServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WordServlet</servlet-name>
-    <url-pattern>/word</url-pattern>
+    <servlet-name>HttpFormServlet</servlet-name>
+    <url-pattern>/fs</url-pattern>
   </servlet-mapping>
 </web-app>
