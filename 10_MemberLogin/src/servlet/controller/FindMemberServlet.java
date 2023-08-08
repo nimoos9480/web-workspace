@@ -1,10 +1,15 @@
 package servlet.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import servlet.model.dao.MemberDAO;
+import servlet.model.vo.MemberDTO;
 
 
 public class FindMemberServlet extends HttpServlet {
@@ -12,7 +17,21 @@ public class FindMemberServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
 		
+//		MemberDAO dao = new MemberDAO();
+		try {
+			
+//			MemberDTO dto = dao.findByIdMember(id);
+			MemberDTO dto = MemberDAO.getInsatance().findByIdMember(id);
+			if(dto!=null) {
+				// 데이더 바인딩
+				request.setAttribute("dto", dto); 
+				request.getRequestDispatcher("views/find_ok.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("views/find_fail.jsp");
+			}
+		} catch (SQLException e) {}
 	}
 
 
