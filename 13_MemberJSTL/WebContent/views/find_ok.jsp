@@ -11,13 +11,13 @@
 <body>
 	
 	<h1>회원 검색 결과</h1>
-	<c:if test="${dto!= null}">
+
 		<ul>
 			<li>아이디 : ${dto.id}</li>
 			<li>이름 : ${dto.name}</li>
 			<li>주소 : ${dto.address}</li>
 		</ul>
-	</c:if>
+
 	
 </body>
 </html>

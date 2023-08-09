@@ -19,7 +19,8 @@
 			<th>이름</th>
 			<th>주소</th>
 		</tr>
-		<c:forEach var="item" items="${list}">
+		
+		<c:forEach items="${list}" var="item">
 			<tr>
 				<td>${item.id}</td>
 				<td>${item.name}</td>

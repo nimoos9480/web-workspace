@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${name}님의 정보를 수정했다.
+	<h3>${dto.name}님의 정보를 수정했습니다.</h3>
+	<a href="/index.jsp">index로 이동</a>
 
 </body>
 </html>

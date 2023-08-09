@@ -18,11 +18,13 @@ public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 폼값 받는다.
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		
+		// 2. 객체 생성
 		MemberDTO dto = new MemberDTO();
 		dto.setId(id);
 		dto.setPassword(password);
@@ -30,12 +32,17 @@ public class UpdateServlet extends HttpServlet {
 		dto.setAddress(address);
 		
 		try {
-			MemberDAO.getInstance().update(dto);
+			// 3. DAO
+			MemberDAO.getInstance().updateMember(dto);
 			
+			// 4. 수정된 값 Session에 다시 데이터 바인딩
 			HttpSession session = request.getSession();
-			session.setAttribute("dto", dto);
+			if(session.getAttribute("dto")!=null) {
+				session.setAttribute("dto", dto);
+			}
 			
-			response.sendRedirect("views/update_result.jsp");
+			// 5. 네비게이션
+			request.getRequestDispatcher("views/update_result.jsp").forward(request, response);
 		} catch (SQLException e) {}
 		
 	}
