@@ -22,6 +22,8 @@ public class ViewMemberServlet extends HttpServlet {
 		try {
 			list = dao.showAllMember();
 		} catch (SQLException e) {}
+		
+		System.out.println("list :: " + list);
 
 		// 2. 바인딩
 		request.setAttribute("list", list);
