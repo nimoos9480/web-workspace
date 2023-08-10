@@ -23,7 +23,7 @@ public class FindMemberServlet extends HttpServlet {
 		try {
 			
 //			MemberDTO dto = dao.findByIdMember(id);
-			MemberDTO dto = MemberDAO.getInsatance().findByIdMember(id);
+			MemberDTO dto = MemberDAO.getInstance().findByIdMember(id);
 			if(dto!=null) {
 				// 데이더 바인딩
 				request.setAttribute("dto", dto); 

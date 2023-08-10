@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
 			// 3. DAO와 연결
 //			MemberDAO dao = new MemberDAO();
 //			dao.registerMember(dto);
-			MemberDAO.getInsatance().registerMember(dto);
+			MemberDAO.getInstance().registerMember(dto);
 			
 			// 4. 데이터 바인딩 - session에
 			HttpSession session = request.getSession();

@@ -23,7 +23,8 @@ public class DispatcherMainTest {
 	 * */
 
 	public static void main(String[] args) {
-		String command = "INSERT";
+//		String command = "INSERT";
+		String command = "DELETE";
 		
 		ActionFactory factory = ActionFactory.getInstance();
 		Action action = factory.createAction(command);
