@@ -15,7 +15,6 @@ public class LoginController implements Controller {
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		String path = "views/login_result.jsp";
 		
 		MemberVO vo = MemberDAO.getInstance().login(id, password);
 		
@@ -24,7 +23,8 @@ public class LoginController implements Controller {
 			session.setAttribute("vo", vo);
 		} 
 		
-		return new ModelAndView(path);
+		return new ModelAndView("views/login_result.jsp", true); // forward 방식
+		
 	}
 
 }

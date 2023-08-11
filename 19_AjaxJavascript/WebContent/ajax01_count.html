@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		동기적 - 요청이 들어온 순서대로 실행
+		비동기적 - 빨리 처리되는 순서대로 실행 // 서버에 갔다와도 페이지가 안바뀐 상태에서 데이터 처리 //  => Ajax가 대표적 
+	 -->
+	 
+	 <h2>Show Count</h2>
+	 <input type="button" value="count 증가" onclick="startRequest()">
+	 <div id="resultView"></div>
+	 
+	 <script>
+	 	let xhr;  // XML Http Request
+	 	function startRequest() { // 요청에 해당하는 로직을 담는 함수
+	 		xhr = new XMLHttpRequest();
+	 		// alert(xhr.readyState);  // 0 호출(시작 전)
+	 		
+	 		xhr.onreadystatechange = callback;  // 상태변화를 감지
+	 		// alert(xhr.readyState); // 0 호출 (callback 함수와 연결한 것, 호출은 X => 이 시점까지도 아직 준비 중이라는 의미)
+	 		
+	 		xhr.open("get", "CountServlet?id=ajax&password=1212");
+	 		// alert(xhr.readyState);  // 1
+	 		
+	 		xhr.send(null); // GET 방식이어서 null인 것
+	 		// 이때 서버로 날라간다! 즉 실질적인 요청이 이때 들어감
+	 		// alert(xhr.readyState);  // 1
+	 	}
+	 	
+	 	function callback() { // 응답에 해당하는 로직을 담는 함수
+	 		// alert("callback :: " + xhr.readyState); // callback :: 1 -> 4까지 뜸 => 4까지 떠야 서버에 전송하고 응답까지 왔다는 뜻
+	 		if(xhr.readyState === 4) {
+	 		// console.log(xhr.status); == 200이 떠야 정상인 것
+	 			if(xhr.status === 200) {
+	 				const text = xhr.responseText;
+	 				document.querySelector("#resultView").innerHTML = "<h4>" + text + "</h4>";
+	 			}
+	 			
+	 		}
+	 		
+	 	}
+	 	
+	 </script>
+</body>
+</html>

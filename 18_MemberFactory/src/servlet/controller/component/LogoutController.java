@@ -12,13 +12,16 @@ public class LogoutController implements Controller {
 	@Override
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		String path = "index.jsp";
 		
 		if(session.getAttribute("vo")!=null) {
 			session.invalidate();
-			path =  "views/logout.jsp";
+			return new ModelAndView("views/logout.jsp");
 		}
-		return new ModelAndView(path);
+//		return new ModelAndView("index.jsp");
+		return null;
+		
+		 // return null; => 특정한 뷰를 표시하지 않고, 요청을 더 이상 처리하지 않겠다는 의미
+		 					//보통 이런 경우, 다른 조건에 따라 다른 뷰 또는 처리를 위한 ModelAndView 객체를 반환하는 것이 일반적
 	}
 
 }

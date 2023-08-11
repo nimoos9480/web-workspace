@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원가입</h1>
+	<form action=/register.do method="post">
+	
+		아이디 : <input type="text" name="id" id="id">
+		<input type="button" value="중복체크" onclick="startRequest()">
+		<span id="idCheckView">
+			<!-- 결과값을 받을 곳 -->		
+			<!-- DB에 아이디가 있으면 ID 사용 불가! 
+							 없으면 ID 사용 가능!
+							 
+				command : idCheck.do
+				component : IdCheckController
+				dao : findByIdMember <-- 얘를 사용해도 되고
+					아님 새로 만든다면 idExist <-- 만들어도 됨!
+			-->
+		</span>
+		<br>
+		비밀번호 : <input type="password" name="password"><br>
+		이름 : <input type="text" name="name"><br>
+		주소 : <input type="text" name="address"><br>
+		<input type="submit" value="가입">
+		
+		<script>
+		let xhr;
+		function startRequest() { // 요청
+			const idCheck = document.querySelector("#id");
+			xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = callback;
+			xhr.open("GET", "idCheck.do?id=" + encodeURI(encodeURIComponent(idCheck.value))); // 서버랑 통신 => a 링크처럼 command 경로 넣어주면 됨 
+			xhr.send(null);
+		}
+		
+		function callback() { // 응답
+			if(xhr.readyState === 4 && xhr.status === 200) {
+				// console.log(xhr.status);
+				const text = xhr.responseText;
+				document.querySelector("#idCheckView").innerHTML = "<h4>" + decodeURI(decodeURIComponent(text)) + "</h4>";	
+		
+			}
+		}
+		</script>
+		
+	</form>
+</body>
+</html>

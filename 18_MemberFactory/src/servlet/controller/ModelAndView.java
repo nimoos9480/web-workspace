@@ -2,7 +2,7 @@ package servlet.controller;
 
 public class ModelAndView {
 	private String path;
-	private boolean isRedirect;
+	private boolean isRedirect;  // false가 기본값
 	
 	public ModelAndView() {}
 	public ModelAndView(String path) { // path만 보낼 땐 forward 방식

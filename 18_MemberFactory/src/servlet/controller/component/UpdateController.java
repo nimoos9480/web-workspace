@@ -17,7 +17,7 @@ public class UpdateController implements Controller {
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
-		String path = "views/update.jsp";
+
 		
 		MemberVO vo = new MemberVO(id, password, name, address);
 		
@@ -27,9 +27,9 @@ public class UpdateController implements Controller {
 		if(session.getAttribute("vo")!=null) {
 			session.setAttribute("vo", vo);
 			
-			path = "views/update_result.jsp";
+			return new ModelAndView("views/update_result.jsp");
 		}
-		return new ModelAndView(path);
+		return new ModelAndView("views/update.jsp");
 	}
 
 }
