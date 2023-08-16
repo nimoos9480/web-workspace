@@ -16,23 +16,32 @@ public class IdCheckController implements Controller {
 
 	@Override
 	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String id = request.getParameter("id");
-		
-		PrintWriter out = response.getWriter();
-
+		String id = request.getParameter("id");		
+//		PrintWriter out = response.getWriter();
 		MemberVO vo = MemberDAO.getInstance().findByIdMember(id);
 		
-		if(id!=null && !id.isEmpty()) {
-			 if (vo != null) {
-	                out.print("이미 사용중인 아이디입니다.");
-	            } else {
-	                out.print("사용 가능한 아이디입니다.");
-	            }
-	        } else {
-	            out.print("아이디를 입력해주세요.");
-	        }
-
-		return new ModelAndView();
+		boolean flag = false;
+		if(vo!=null) {
+			flag = true;
+		}
+		
+		// 비동기 방식
+		PrintWriter out = response.getWriter();
+		out.print(flag);
+		
+		return null;
+		
+//		if(id!=null && !id.isEmpty()) {
+//			 if (vo != null) {
+//	                out.print("이미 사용중인 아이디입니다.");
+//	            } else {
+//	                out.print("사용 가능한 아이디입니다.");
+//	            }
+//	        } else {
+//	            out.print("아이디를 입력해주세요.");
+//	        }
+//
+//		return new ModelAndView();
 		
 	}
 

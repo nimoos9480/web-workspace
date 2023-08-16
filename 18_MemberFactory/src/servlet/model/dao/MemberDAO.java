@@ -166,7 +166,7 @@ public class MemberDAO implements MemberDAOTemplate{
 	
 	@Override
 	public void updateMember(MemberVO vo) throws SQLException {
-		Connection conn= getConnection();
+		Connection conn = getConnection();
 		
 		String query = "UPDATE member SET password=?, name=?, address=? WHERE id=?";
 		PreparedStatement ps = conn.prepareStatement(query);

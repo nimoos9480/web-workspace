@@ -33,15 +33,29 @@
 			const idCheck = document.querySelector("#id");
 			xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = callback;
-			xhr.open("GET", "idCheck.do?id=" + encodeURI(encodeURIComponent(idCheck.value))); // 서버랑 통신 => a 링크처럼 command 경로 넣어주면 됨 
-			xhr.send(null);
+			// xhr.open("GET", "idCheck.do?id=" + encodeURI(encodeURIComponent(idCheck.value))); // 서버랑 통신 => a 링크처럼 command 경로 넣어주면 됨
+			// xhr.send(null);
+			xhr.open("post", "idCheck.do?");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charser=utf-8"); // post 방식일 때 키랑 값으로 보낸다고 명시해주는 것
+			xhr.send("id=" + document.querySelector("#id").value);			
 		}
 		
 		function callback() { // 응답
 			if(xhr.readyState === 4 && xhr.status === 200) {
 				// console.log(xhr.status);
-				const text = xhr.responseText;
-				document.querySelector("#idCheckView").innerHTML = "<h4>" + decodeURI(decodeURIComponent(text)) + "</h4>";	
+				
+				const flag = xhr.responseText;
+				const idCheckView = document.querySelector("#idCheckView");
+				// if(flag === "true")
+				if(eval(flag) === true){
+					idCheckView.innerHTML = "<span style='color:red'>ID 사용 불가!!</span>";
+				} else {
+					idCheckView.innerHTML = "<span style='color:blue'>ID 사용 가능!!</span>";
+				}
+				
+				
+				// const text = xhr.responseText;
+				// document.querySelector("#idCheckView").innerHTML = "<h4>" + decodeURI(decodeURIComponent(text)) + "</h4>";	
 		
 			}
 		}
