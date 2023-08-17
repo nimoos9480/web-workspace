@@ -16,19 +16,15 @@ public class DispatcherServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// hidden 값으로 들어온 요청을 받지 않고, 들어온 요청의 주소를 직접 인식시킨다.
-		String requestURI = request.getRequestURI();
-		System.out.println("RequestURI :: " + requestURI);
-		
-		String[] requestURIList = requestURI.split("/");
-		System.out.println("RequestURIList :: " + Arrays.toString(requestURIList));
-		
+		String requestURI = request.getRequestURI();  // command를 URI로 받아온다		
+		String[] requestURIList = requestURI.split("/");		
 		String command = requestURIList[requestURIList.length-1]; 
-		System.out.println("Command :: " + command);
+
 		
 		Controller controller = HandlerMapping.getInstance().createController(command);		
-			
+		ModelAndView mv = null;
 		try {
-			ModelAndView mv = controller.handle(request, response);
+			mv = controller.handle(request, response);
 			
 			if(mv!=null) {
 				if(mv.isRedirect()) {

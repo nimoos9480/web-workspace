@@ -50,18 +50,20 @@ public class ItemDAO implements ItemDAOTemplate{
 		String query = "SELECT * FROM item";
 		PreparedStatement ps = conn.prepareStatement(query);
 		
-		ResultSet rs = ps.executeQuery();
 		ArrayList<Item> list = new ArrayList<>();
+		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
-			Item item = new Item();
-			item.setItemId(rs.getInt("itemId"));
-			item.setItemName(rs.getString("itemName"));
-			item.setPrice(rs.getInt("price"));
-			item.setDescription(rs.getString("description"));
-			item.setPictureUrl(rs.getString("pictureUrl"));
-			item.setCount(rs.getInt("count"));
+			list.add(new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6)));		
 			
-			list.add(item);
+//			Item item = new Item();
+//			item.setItemId(rs.getInt("itemId"));
+//			item.setItemName(rs.getString("itemName"));
+//			item.setPrice(rs.getInt("price"));
+//			item.setDescription(rs.getString("description"));
+//			item.setPictureUrl(rs.getString("pictureUrl"));
+//			item.setCount(rs.getInt("count"));
+			
+//			list.add(item);
 		}
 		closeAll(rs, ps, conn);
 		return list;
@@ -71,22 +73,23 @@ public class ItemDAO implements ItemDAOTemplate{
 	public Item getItem(int itemId) throws SQLException {
 		Connection conn = getConnection();
 		
-		String query = "SELECT * FROM item Where itemId=?";
+		String query = "SELECT * FROM item Where item_id=?";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setInt(1, itemId);
 		
 		ResultSet rs = ps.executeQuery();
 		Item item = null;
 		if(rs.next()) {
-			item = new Item();
-			item.setItemId(rs.getInt("itemId"));
-			item.setItemName(rs.getString("itemName"));
-			item.setPrice(rs.getInt("price"));
-			item.setDescription(rs.getString("description"));
-			item.setPictureUrl(rs.getString("pictureUrl"));
-			item.setCount(rs.getInt("count"));
+			item = new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6));	
+			
+//			item.setItemId(rs.getInt("itemId"));
+//			item.setItemName(rs.getString("itemName"));
+//			item.setPrice(rs.getInt("price"));
+//			item.setDescription(rs.getString("description"));
+//			item.setPictureUrl(rs.getString("pictureUrl"));
+//			item.setCount(rs.getInt("count"));
 		}
-		
+		closeAll(rs, ps, conn);
 		return item;
 	}
 
@@ -94,19 +97,27 @@ public class ItemDAO implements ItemDAOTemplate{
 	public boolean updateRecordCount(int itemId) throws SQLException {
 		Connection conn = getConnection();
 		
-		String query = "UPDATE item SET count=? where itemId=?";
+		String query = "UPDATE item SET count=count+1 where item_id=?";
 		PreparedStatement ps = conn.prepareStatement(query);
-		int count = getItem(itemId).getCount();
+		ps.setInt(1, itemId);
 		
-		ps.setInt(1, ++count);
-		ps.setInt(2, itemId);
+		int row = ps.executeUpdate();
 		
-		int result = ps.executeUpdate();
+		boolean result = false;
+		if(row > 0) result = true;
 		
-		if(result == 1) {
-			return true;
-		}
-	
+//		int count = getItem(itemId).getCount();
+//		
+//		ps.setInt(1, ++count);
+//		ps.setInt(2, itemId);
+//		
+//		int result = ps.executeUpdate();
+//		
+//		if(result == 1) {
+//			return true;
+//		}
+		
+		closeAll(ps, conn);
 		return false;
 	}
 
