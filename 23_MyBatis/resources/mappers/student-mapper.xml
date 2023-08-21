@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.ort//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studentMapper">
+
+<!-- 
+	resultMap에서 TB_STUDENT, TB_DEPARTMENT 연결하려면
+	id, result <-- 앞에서 배운 건 여기까지였다면
+	<association property="department" resultMap="departmentMap" />사용
+
+	showStudent 
+ -->
+ 
+	<resultMap type="department" id="departmentMap">
+    	<id property="departmentNo" column="DEPARTMENT_NO"/>
+    	<result property="departmentName" column="DEPARTMENT_NAME"/>
+    	<result property="category" column="CATEGORY"/>
+    	
+	</resultMap>
+	
+	<resultMap type="student" id="studentMap">
+    	<id property="studnetNo" column="STUDENT_NO"/>
+    	<result property="studentName" column="STUDENT_NAME"/>    	
+    	<result property="studentAddress" column="STUDENT_ADDRESS"/>    
+    	<association property="department" resultMap="departmentMap" />
+	</resultMap>
+	
+	<select id="showStudent" parameterType="String">
+	<!-- #{word} : 조건 - word가 null인지 아닌지 
+		WHERE student_no, student_name, student_address, department_name, category랑 word가 포함되어 있는 지
+		이 중 하나만 걸려도 되니까 OR
+	-->
+		SELECT student_no, student_name, student_address, department_name, category
+		FROM student
+		JOIN department USING(departmentNo)
+		WHERE 1=1	(무조건 트루일때)
+	 	 <if test="word != null">
+        AND (
+            student_no LIKE '%' || #{word} || '%'
+            OR student_name LIKE '%' || #{word} || '%'
+            OR student_address LIKE '%' || #{word} || '%'
+            OR department_name LIKE '%' || #{word} || '%'
+            OR category LIKE '%' || #{word} || '%'
+        )
+    </if>
+	</select>
+
+</mapper>
+

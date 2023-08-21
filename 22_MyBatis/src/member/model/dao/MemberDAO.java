@@ -33,8 +33,8 @@ public class MemberDAO {
 		return sqlSession.selectList("memberMapper.showAllMember"); // 받아온 파람값이 없으니까 넣지 않음
 	}
 	
-	public MemberVO findByIdMember(SqlSession sqlSession, String id) {
-		return sqlSession.selectOne("memberMapper.findByIdMember", id);
+	public List<MemberVO> findByIdMember(SqlSession sqlSession, List<String> list) {
+		return sqlSession.selectList("memberMapper.findByIdMember", list);
 	}
 	
 	public MemberVO login(SqlSession sqlSession, MemberVO vo) {

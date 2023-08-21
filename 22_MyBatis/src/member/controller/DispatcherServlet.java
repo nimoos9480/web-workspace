@@ -42,7 +42,11 @@ public class DispatcherServlet extends HttpServlet {
 														 // false니까 forward(-> url이 XXX.do로 이동함, 로직이 외부에 공개되지 않음)
 				}
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
 	}
 
 
