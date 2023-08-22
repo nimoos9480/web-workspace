@@ -2,29 +2,20 @@ package servlet.model.vo;
 
 public class MemberDTO {
 	private String id;
-	private String pasword;
+	private String password;
 	private String name;
 	private String address;
-	
-	public MemberDTO() {}
-	public MemberDTO(String id, String pasword, String name, String address) {
-
-		this.id = id;
-		this.pasword = pasword;
-		this.name = name;
-		this.address = address;
-	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPasword() {
-		return pasword;
+	public String getPassword() {
+		return password;
 	}
-	public void setPasword(String pasword) {
-		this.pasword = pasword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getName() {
 		return name;
@@ -38,12 +29,6 @@ public class MemberDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	@Override
-	public String toString() {
-		return "MemberDTO [id=" + id + ", pasword=" + pasword + ", name=" + name + ", address=" + address + "]";
-	}
-	
-	
 	
 	
 }

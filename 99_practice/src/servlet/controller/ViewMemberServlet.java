@@ -20,6 +20,9 @@ public class ViewMemberServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 		MemberDAO dao = new MemberDAO();
 		ArrayList<MemberVO> list = null;
 		
@@ -29,7 +32,9 @@ public class ViewMemberServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("viewMember.jsp").forward(request, response);
+		if(list!=null) {
+			request.getRequestDispatcher("viewMember.jsp").forward(request, response);
+		}
 				
 	}
 

@@ -12,7 +12,7 @@ public interface MemberDAOTemplate {
 	void closeAll(PreparedStatement ps, Connection conn) throws SQLException;
 	void closeAll(ResultSet rs, PreparedStatement ps, Connection conn) throws SQLException;
 	
-	void inserMember(MemberVO vo) throws SQLException;
+	void insertMember(MemberVO vo) throws SQLException;
 	ArrayList<MemberVO> showAllMember() throws SQLException;
 	MemberVO findByNameMember(String name) throws SQLException;
 	

@@ -23,13 +23,16 @@ public class EntranceServlet extends HttpServlet {
 		int age = Integer.parseInt(request.getParameter("age"));
 		String addr = request.getParameter("addr");
 		
-		MemberVO vo = new MemberVO(name, age, addr);	
+		MemberVO vo = new MemberVO(name, age, addr);
 		MemberDAO dao = new MemberDAO();
 		try {
-			dao.inserMember(vo);
+			dao.insertMember(vo);
 		} catch (SQLException e) {}
 		
 		response.sendRedirect("view");
+		
+				
+				
 	}
 
 	

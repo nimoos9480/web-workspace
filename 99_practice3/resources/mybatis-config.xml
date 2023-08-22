@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="member.model.vo.MemberVO" alias="Member"/>
+	</typeAliases>
+	
+	<environments default="developmnet">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:orcle:thin:@localhost:1521:xe"/>
+				<property name="username" value="sample"/>
+				<property name="password" value="SAMPLE"/>		
+			</dataSource>
+		</environment>		
+	</environments>
+	<mappers>
+		<mapper resource="mappers/member-config.xml"/>
+	</mappers>
+</configuration>

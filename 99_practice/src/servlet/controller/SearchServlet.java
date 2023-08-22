@@ -17,7 +17,10 @@ import servlet.model.MemberVO;
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
 		String name = request.getParameter("name");
 		
 		MemberDAO dao = new MemberDAO();
@@ -28,14 +31,15 @@ public class SearchServlet extends HttpServlet {
 		} catch (SQLException e) {}
 		
 		request.setAttribute("vo", vo);
+		
 		if(vo!=null) {
 			request.getRequestDispatcher("view.jsp").forward(request, response);
-		} else {
+		}else {
 			request.getRequestDispatcher("fail.jsp").forward(request, response);
 		}
 		
-		
 	}
+
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
