@@ -23,7 +23,7 @@ public class ViewMemberServlet extends HttpServlet {
 			list = dao.showAllMember();
 		} catch (SQLException e) {}
 		
-		System.out.println("list :: " + list);
+		System.out.println("list :: " + list); 
 
 		// 2. 바인딩
 		request.setAttribute("list", list);

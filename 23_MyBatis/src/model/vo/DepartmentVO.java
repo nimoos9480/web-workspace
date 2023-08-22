@@ -1,7 +1,7 @@
 package model.vo;
 
 public class DepartmentVO {
-	private String deparmentNo;
+	private String departmentNo;
 	private String departmentName;
 	private String category;
 
@@ -9,20 +9,20 @@ public class DepartmentVO {
 	public DepartmentVO() {}
 
 
-	public DepartmentVO(String deparmentNo, String departmentName, String category) {
-		this.deparmentNo = deparmentNo;
+	public DepartmentVO(String departmentNo, String departmentName, String category) {
+		this.departmentNo = departmentNo;
 		this.departmentName = departmentName;
 		this.category = category;
 	}
 
 
 	public String getDeparmentNo() {
-		return deparmentNo;
+		return departmentNo;
 	}
 
 
 	public void setDeparmentNo(String deparmentNo) {
-		this.deparmentNo = deparmentNo;
+		this.departmentNo = deparmentNo;
 	}
 
 
@@ -48,7 +48,7 @@ public class DepartmentVO {
 
 	@Override
 	public String toString() {
-		return "DepartmentVO [deparmentNo=" + deparmentNo + ", departmentName=" + departmentName + ", category="
+		return "DepartmentVO [departmentNo=" + departmentNo + ", departmentName=" + departmentName + ", category="
 				+ category + "]";
 	}
 

@@ -11,9 +11,10 @@ import model.vo.StudentVO;
 public class StudentService {
 	public List<StudentVO> showStudent(String word) {
 		SqlSession sqlSession = Template.getSqlSession();
+		
 		List<StudentVO> list = StudentDAO.getInstance().showStudent(sqlSession, word);
 		sqlSession.close();
-		return sqlSession.selectList("studentMapper.showStudent", word);
+		return list;
 		
 	}
 

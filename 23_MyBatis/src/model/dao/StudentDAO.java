@@ -14,8 +14,9 @@ public class StudentDAO {
 		return dao;
 	}
 	
+	// SqlSession 넣으려면 lib에 파일 넣어줘야 함
 	public List<StudentVO> showStudent(SqlSession sqlSession, String word) {
-		return sqlSession.selectList("studentMapper.showStudent");
+		return sqlSession.selectList("studentMapper.showStudent", word);
 		
 	}
 }

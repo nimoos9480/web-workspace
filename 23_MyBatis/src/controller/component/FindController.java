@@ -1,9 +1,14 @@
 package controller.component;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import controller.Controller;
 import controller.ModelAndView;
@@ -19,7 +24,20 @@ public class FindController implements Controller {
 		String word = request.getParameter("word");
 		List<StudentVO> list = new StudentService().showStudent(word);
 		
-		return null;
+		
+		JSONObject json = new JSONObject();
+		ObjectMapper mapper = new ObjectMapper();
+		String result = mapper.writeValueAsString(list);
+		
+		json.put("result", result);		// json에 담기
+				
+		PrintWriter out = response.getWriter(); // 담은 걸 보내기
+		out.print(json);
+		
+
+
+        return null; // null로 반환
+      
 	}
 
 }
