@@ -11,6 +11,7 @@ import config.ServerInfo;
 
 public class MemberDAO implements MemberDAOTemplate{
 	
+	
 	// 드라이버 로딩
 	public MemberDAO() {
 		try {
@@ -21,7 +22,7 @@ public class MemberDAO implements MemberDAOTemplate{
 
 	@Override
 	public Connection getConnection() throws SQLException {
-		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.NAME, ServerInfo.PASSWORD); 
+		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.NAME, ServerInfo.PASSWORD);
 		
 		return conn;
 	}
@@ -43,33 +44,32 @@ public class MemberDAO implements MemberDAOTemplate{
 	@Override
 	public void insertMember(MemberVO vo) throws SQLException {
 		Connection conn = getConnection();
-		String query = "INSERT INTO member(name, age, addr) values(?, ?, ?)";
+		String query = "INSERT INTO member(name, age, addr) VALUES (?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(query);
 		
 		ps.setString(1, vo.getName());
 		ps.setInt(2, vo.getAge());
 		ps.setString(3, vo.getAddr());
 		
-		System.out.println(ps.executeUpdate() +"명 가입!");
+		System.out.println(ps.executeUpdate() + "명 가입!");
 		
 		closeAll(ps, conn);
-			
+		
+		
 	}
 
 	@Override
 	public ArrayList<MemberVO> showAllMember() throws SQLException {
 		Connection conn = getConnection();
-		String query = "SELECT * FROM member";
+		String query ="SELECT * FROM member";
 		PreparedStatement ps = conn.prepareStatement(query);
 		
-		ArrayList<MemberVO> list = new ArrayList<>();
 		ResultSet rs = ps.executeQuery();
+		ArrayList<MemberVO> list = new ArrayList<>() ;
 		if(rs.next()) {
 			list.add(new MemberVO(rs.getString("name"), rs.getInt("age"), rs.getString("addr")));
 		}
-		
 		closeAll(rs, ps, conn);
-		
 		return list;
 	}
 
@@ -86,7 +86,6 @@ public class MemberDAO implements MemberDAOTemplate{
 		}
 		
 		closeAll(rs, ps, conn);
-		
 		return vo;
 	}
 
