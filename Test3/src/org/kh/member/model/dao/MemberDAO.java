@@ -5,12 +5,12 @@ import org.kh.member.model.vo.MemberVO;
 
 public class MemberDAO {
 	
-	private static MemberDAO dao = new MemberDAO();
+private static MemberDAO dao = new MemberDAO();
 	
 	private MemberDAO() {}
 	public static MemberDAO getInstance() {
 		return dao;
-	}
+	}	
 	
 	public int insertMember(SqlSession session, MemberVO mOne) {
 		int result=0;
