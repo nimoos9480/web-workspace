@@ -1,4 +1,4 @@
-package edu.kh.test.model.dao;
+package edu.kh.test.user.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import config.ServerInfo;
-import edu.kh.test.model.vo.UserDTO;
+import edu.kh.test.user.model.vo.UserDTO;
 
 public class UserDAO implements UserDAOTemplate{
 	
@@ -15,6 +15,7 @@ public class UserDAO implements UserDAOTemplate{
 		// 드라이버 로딩
 		try {
 			Class.forName(ServerInfo.DRIVER_NAME);
+			// Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -24,6 +25,7 @@ public class UserDAO implements UserDAOTemplate{
 	@Override
 	public Connection getConnection() throws SQLException {
 		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.NAME, ServerInfo.PASSWORD);
+		// Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "sample", "SAMPLE");
 		return conn;
 	}
 
@@ -47,21 +49,22 @@ public class UserDAO implements UserDAOTemplate{
 		String query = "SELECT * FROM tb_user WHERE user_no=?";
 		PreparedStatement ps = conn.prepareStatement(query);
 		
-		ps.setInt(1, userNo);
+		ps.setInt(1, userNo);		
 		
-		UserDTO dto = null;
 		ResultSet rs = ps.executeQuery();
+		UserDTO dto = null;
 		if(rs.next()) {
 			dto = new UserDTO();
 			dto.setUserNo(rs.getInt("user_No"));
+			// == dto.setUserNo(userNo);로 써도 됨
 			dto.setUserId(rs.getString("user_Id"));
 			dto.setUserName(rs.getString("user_Name"));
 			dto.setUserAge(rs.getInt("user_Age"));
 			
-			System.out.println(dto);
-	
+			// System.out.println(dto); == 없어도 됨
 		}
-		closeAll(ps, conn);
+		
+		closeAll(rs, ps, conn);
 		return dto;
 	}
 }

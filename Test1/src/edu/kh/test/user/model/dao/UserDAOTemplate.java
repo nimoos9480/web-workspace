@@ -1,11 +1,11 @@
-package edu.kh.test.model.dao;
+package edu.kh.test.user.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import edu.kh.test.model.vo.UserDTO;
+import edu.kh.test.user.model.vo.UserDTO;
 
 public interface UserDAOTemplate {
 	Connection getConnection() throws SQLException;

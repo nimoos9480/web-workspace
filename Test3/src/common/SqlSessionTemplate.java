@@ -1,3 +1,4 @@
+package common;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,12 +11,11 @@ public class SqlSessionTemplate {
 	public static SqlSession getSqlSession() {
 
 		SqlSession session = null;
-		String resource = "/mybatis-config.xml";
+		String resource = "mybatis-config.xml";
 		
 		try {
 			
-			InputStream stream = Resources.getResourceAsStream(resource)
-
+			InputStream stream = Resources.getResourceAsStream(resource);
 			
 			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 			SqlSessionFactory factory = builder.build(stream);
@@ -24,7 +24,7 @@ public class SqlSessionTemplate {
 
 		} catch (IOException e) {
 
-		e.printStackTrace();
+			e.printStackTrace();
 
 		}
 

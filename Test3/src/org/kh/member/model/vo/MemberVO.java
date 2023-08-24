@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.kh.member.model.vo;
 
 import java.util.Date;

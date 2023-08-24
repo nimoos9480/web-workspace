@@ -1,11 +1,13 @@
-package edu.kh.test.model.vo;
+package edu.kh.test.user.model.vo;
 
 public class UserDTO {
 	private int userNo; 
 	private String userId;
 	private String userName;
 	private int userAge;
+
 	
+	public UserDTO() {}
 	
 	public int getUserNo() {
 		return userNo;
